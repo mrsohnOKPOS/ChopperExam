@@ -18,6 +18,25 @@ final class _$MyService extends MyService {
   final Type definitionType = MyService;
 
   @override
+  Future<Response<Map<dynamic, dynamic>>> getStoreList() {
+    final Uri $url = Uri.parse('/api/store/list/');
+    // final Map<String, dynamic> $params = <String, dynamic>{'id': id};
+    final Map<String, String> $headers = {
+      'X-Auth-Token': '21a2c0ac-0995-4abd-8ae0-92d338162a6e',
+    };
+    print("SENDUrl:"+client.baseUrl.toString()+$url.toString());
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      // parameters: $params,
+      headers: $headers,
+    );
+    return client.send<Map<dynamic, dynamic>, Map<dynamic, dynamic>>($request);
+  }
+
+
+  @override
   Future<Response<dynamic>> getResource(String id) {
     final Uri $url = Uri.parse('/resources/${id}');
     final Request $request = Request(

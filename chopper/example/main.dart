@@ -1,10 +1,13 @@
 import 'package:chopper/chopper.dart';
 
 import 'definition.dart';
+import '../lib/src/jsonLogPrint.dart';
+
+
 
 Future<void> main() async {
   final chopper = ChopperClient(
-    baseUrl: Uri.parse('http://localhost:8000'),
+    baseUrl: Uri.parse('https://tmaapp.okpos.co.kr:8080'),
     services: [
       // the generated service
       MyService.create(ChopperClient()),
@@ -13,12 +16,12 @@ Future<void> main() async {
   );
 
   final myService = chopper.getService<MyService>();
-
-  final response = await myService.getMapResource('1');
-  print(response.body);
-
-  final list = await myService.getListResources();
-  print(list.body);
+  final stoerList = await myService.getStoreList();
+  jsonLogPrint.log(stoerList.bodyString);
+  // Map userMap = jsonDecode(stoerList.bodyString);
+  // var user = StoreData.fromJson(userMap);
 
   chopper.dispose();
 }
+
+

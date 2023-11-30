@@ -4,9 +4,12 @@ import 'package:chopper/chopper.dart';
 
 part 'definition.chopper.dart';
 
-@ChopperApi(baseUrl: '/resources')
+@ChopperApi(baseUrl: '/')
 abstract class MyService extends ChopperService {
   static MyService create(ChopperClient client) => _$MyService(client);
+
+  @Get(path: '/api/store/list', headers: {'X-Auth-Token': '21a2c0ac-0995-4abd-8ae0-92d338162a6e'})
+  Future<Response> getStoreList();
 
   @Get(path: '/{id}')
   Future<Response> getResource(
